@@ -1,0 +1,20 @@
+{
+  "name": "organiser-backend",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "generate": "drizzle-kit generate",
+    "migration:local": "wrangler d1 migrations apply organiser-backend --local",
+    "migration:remote": "wrangler d1 migrations apply organiser-backend --remote",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "drizzle-orm": "^0.33.0",
+    "hono": "^4.6.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240925.0",
+    "drizzle-kit": "^0.24.2",
+    "wrangler": "^3.79.0"
+  }
+}
