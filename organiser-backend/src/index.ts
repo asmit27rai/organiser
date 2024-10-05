@@ -1,17 +1,27 @@
-import { Hono } from "hono";
 import { drizzle } from "drizzle-orm/d1";
-import { users } from "./schema";
+import * as schema from "./schema";
+import { Bindings } from "../env";
+import {cors} from "hono/cors";
+import { JwtVariables } from "hono/jwt";
+import { logger } from "hono/logger";
+import { Context, Hono } from "hono";
+import userRouter from "./routes/user";
 
-export type ENV = {
-  DB: D1Database;
-};
+type Variables = JwtVariables;
 
-const app = new Hono<{ Bindings: ENV }>();
+const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
-app.get("/users", async (c) => {
-  const db = drizzle(c.env.DB);
-  const allUsers = await db.select().from(users).all();
-  return c.json(allUsers);
-});
+app.use(
+  "*",
+  cors({
+    origin: (origin) => origin,
+    credentials: true,
+  }),
+);
+app.use(logger());
+
+app.route("api/users",userRouter);
+
+export const getDB = (c: Context) => drizzle(c.env.DATABASE,{ schema });
 
 export default app;

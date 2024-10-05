@@ -15,7 +15,7 @@ MY_VAR = "my-variable"
 # bucket_name = "my-bucket"
 
 [[d1_databases]]
-binding = "DB"
+binding = "DATABASE"
 database_name = "organiser-backend"
 database_id = "9c04c492-089e-4a74-8634-dba259eba17b"
 migrations_dir = "drizzle"
