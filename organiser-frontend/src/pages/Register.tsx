@@ -12,14 +12,14 @@ import {
 } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 
-import user from "../assets/user.svg";
-import user_1 from "../assets/user_1.svg";
-import user_2 from "../assets/user_2.svg";
-import user_3 from "../assets/user_3.svg";
-import user_4 from "../assets/user_4.svg";
-import user_5 from "../assets/user_5.svg";
-import user_6 from "../assets/user_6.svg";
-import user_7 from "../assets/user_7.svg";
+import user from "/user.svg";
+import user_1 from "/user_1.svg";
+import user_2 from "/user_2.svg";
+import user_3 from "/user_3.svg";
+import user_4 from "/user_4.svg";
+import user_5 from "/user_5.svg";
+import user_6 from "/user_6.svg";
+import user_7 from "/user_7.svg";
 
 export const Register: React.FC = () => {
   const [name, setName] = useState("");
