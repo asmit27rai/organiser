@@ -9,7 +9,7 @@ export const Navbar: React.FC = () => {
   console.log(user);
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-zinc-100 dark:bg-zinc-900">
+    <nav className="flex items-center justify-between p-4 bg-zinc-100 dark:bg-zinc-900 ">
       <Link to="/" className="flex items-center space-x-2">
         <NotebookPen size={24} />
         <span className="text-xl font-bold">Organiser</span>
