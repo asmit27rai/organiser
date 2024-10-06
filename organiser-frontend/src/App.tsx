@@ -6,6 +6,11 @@ import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { Navbar } from "./components/layout/Navbar";
 import {Profile} from "./pages/Profile";
+import Fitness from "./pages/Fitness";
+import Club from "./pages/Club";
+import Personal from "./pages/Personal";
+import College from "./pages/College";
+import Error from "./pages/Error";
 
 const AppContent: React.FC = () => {
   return (
@@ -17,6 +22,11 @@ const AppContent: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/fitness/:id" element={<Fitness />} />
+            <Route path="/club/:id" element={<Club />} />
+            <Route path="/personal/:id" element={<Personal />} />
+            <Route path="/college/:id" element={<College />} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </div>
       </div>

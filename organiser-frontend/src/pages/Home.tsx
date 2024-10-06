@@ -8,63 +8,87 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { Dumbbell, Users, ListTodo, GraduationCap, LucideIcon } from "lucide-react";
 
-export const Home: React.FC = () => (
-  <div className="flex flex-wrap justify-center gap-8 p-10">
-    <Link to="/fitness/:id" className="transform transition-transform hover:scale-105 hover:shadow-xl">
-      <Card className="bg-gradient-to-r from-green-300 to-blue-400 rounded-lg p-6 transition duration-300 h-72 w-72 flex flex-col shadow-md">
-        <CardHeader>
-          <CardTitle className="text-white text-xl font-semibold">Fitness</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-grow flex items-center justify-center">
-          <CardDescription className="text-white text-center">
-            Track your fitness objectives and monitor your progress effectively.
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="text-center text-white">Start your fitness journey</CardFooter>
-      </Card>
-    </Link>
+interface CategoryCardProps {
+  to: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  gradient: string;
+}
 
-    <Link to="/club/:id" className="transform transition-transform hover:scale-105 hover:shadow-xl">
-      <Card className="bg-gradient-to-r from-purple-300 to-pink-400 rounded-lg p-6 transition duration-300 h-72 w-72 flex flex-col shadow-md">
-        <CardHeader>
-          <CardTitle className="text-white text-xl font-semibold">Club</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-grow flex items-center justify-center">
-          <CardDescription className="text-white text-center">
-            Seamlessly join and manage your club activities.
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="text-center text-white">Join a club today</CardFooter>
-      </Card>
-    </Link>
-
-    <Link to="/personal/:id" className="transform transition-transform hover:scale-105 hover:shadow-xl">
-      <Card className="bg-gradient-to-r from-yellow-300 to-red-400 rounded-lg p-6 transition duration-300 h-72 w-72 flex flex-col shadow-md">
-        <CardHeader>
-          <CardTitle className="text-white text-xl font-semibold">Personal</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-grow flex items-center justify-center">
-          <CardDescription className="text-white text-center">
-            Efficiently organize your personal tasks and activities.
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="text-center text-white">Manage your tasks</CardFooter>
-      </Card>
-    </Link>
-
-    <Link to="/college/:id" className="transform transition-transform hover:scale-105 hover:shadow-xl">
-      <Card className="bg-gradient-to-r from-blue-300 to-teal-400 rounded-lg p-6 transition duration-300 h-72 w-72 flex flex-col shadow-md">
-        <CardHeader>
-          <CardTitle className="text-white text-xl font-semibold">College</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-grow flex items-center justify-center">
-          <CardDescription className="text-white text-center">
-            Manage your college-related activities with efficiency.
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="text-center text-white">Access college resources</CardFooter>
-      </Card>
-    </Link>
-  </div>
+const CategoryCard: React.FC<CategoryCardProps> = ({ to, title, description, icon: Icon, gradient }) => (
+  <Link to={to} className="transform transition-transform hover:scale-105 hover:shadow-xl">
+    <Card className={`${gradient} rounded-lg p-6 transition duration-300 h-full w-full flex flex-col shadow-md`}>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="text-white text-xl font-semibold">{title}</CardTitle>
+        <Icon className="text-white" size={24} />
+      </CardHeader>
+      <CardContent className="flex-grow flex items-center justify-center">
+        <CardDescription className="text-white text-center">
+          {description}
+        </CardDescription>
+      </CardContent>
+      <CardFooter className="text-center text-white">
+        <span className="w-full py-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors">
+          Explore {title}
+        </span>
+      </CardFooter>
+    </Card>
+  </Link>
 );
+
+interface Category {
+  to: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  gradient: string;
+}
+
+export const Home: React.FC = () => {
+  const categories: Category[] = [
+    {
+      to: "/fitness/:id",
+      title: "Fitness",
+      description: "Track your fitness objectives and monitor your progress effectively.",
+      icon: Dumbbell,
+      gradient: "bg-gradient-to-br from-green-400 to-emerald-600",
+    },
+    {
+      to: "/club/:id",
+      title: "Club",
+      description: "Seamlessly join and manage your club activities.",
+      icon: Users,
+      gradient: "bg-gradient-to-br from-blue-400 to-indigo-600",
+    },
+    {
+      to: "/personal/:id",
+      title: "Personal",
+      description: "Efficiently organize your personal tasks and activities.",
+      icon: ListTodo,
+      gradient: "bg-gradient-to-br from-orange-400 to-red-600",
+    },
+    {
+      to: "/college/:id",
+      title: "College",
+      description: "Manage your college-related activities with efficiency.",
+      icon: GraduationCap,
+      gradient: "bg-gradient-to-br from-purple-400 to-pink-600",
+    },
+  ];
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center mb-8">Organise Your Task Here</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {categories.map((category) => (
+          <CategoryCard key={category.title} {...category} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Home;

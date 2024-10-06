@@ -121,6 +121,8 @@ export const Profile: React.FC = () => {
         </button>
       </div>
 
+      <h3 className="text-blue-900">{user?.email}</h3>
+
       <button
         className={`mt-4 ${
           isSaving ? "bg-gray-400" : "bg-red-500"
