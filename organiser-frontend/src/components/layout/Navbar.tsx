@@ -18,7 +18,7 @@ export const Navbar: React.FC = () => {
       <div className="flex items-center space-x-4">
         {user ? (
           <>
-            <Link to="/profile" className="flex items-center space-x-2">
+            <Link to={`/profile/${user.id}`} className="flex items-center space-x-2">
             {user.image ? (
                 <img
                   src={user.image}

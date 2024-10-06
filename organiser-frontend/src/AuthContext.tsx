@@ -11,6 +11,7 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string, image?: string) => Promise<void>;
+  updateUser: (updatedData: { name?: string; image?: string }) => Promise<void>; // Add updateUser function here
   logout: () => void;
 }
 
@@ -26,9 +27,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -60,14 +59,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     password: string,
     image?: string
   ) => {
-    const response = await fetch(
-      `${Backend_URL}/api/users/auth/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, image }),
-      },
-    );
+    const response = await fetch(`${Backend_URL}/api/users/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, image }),
+    });
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem("token", data.token);
@@ -75,6 +71,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setUser(data.user);
     } else {
       throw new Error(data.error);
+    }
+  };
+
+  const updateUser = async (updatedData: { name?: string; image?: string }) => {
+    if (!user) throw new Error("No user is logged in");
+
+    const response = await fetch(`${Backend_URL}/api/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    const updatedUser = await response.json();
+    if (response.ok) {
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
+    } else {
+      throw new Error(updatedUser.error);
     }
   };
 
@@ -90,6 +107,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         user,
         login,
         register,
+        updateUser,
         logout,
       }}
     >
