@@ -22,10 +22,10 @@ const AppContent: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile/:id" element={<Profile />} />
-            <Route path="/fitness/:id" element={<Fitness />} />
-            <Route path="/club/:id" element={<Club />} />
-            <Route path="/personal/:id" element={<Personal />} />
-            <Route path="/college/:id" element={<College />} />
+            <Route path="/fitness" element={<Fitness />} />
+            <Route path="/club" element={<Club />} />
+            <Route path="/personal" element={<Personal />} />
+            <Route path="/college" element={<College />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>

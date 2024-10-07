@@ -15,6 +15,20 @@
       "when": 1728136524448,
       "tag": "0001_goofy_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1728338981082,
+      "tag": "0002_loving_typhoid_mary",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1728341799923,
+      "tag": "0003_free_jackpot",
+      "breakpoints": true
     }
   ]
 }

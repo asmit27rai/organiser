@@ -6,6 +6,7 @@ import { JwtVariables } from "hono/jwt";
 import { logger } from "hono/logger";
 import { Context, Hono } from "hono";
 import userRouter from "./routes/user";
+import fitnessRouter from "./routes/fitness";
 
 type Variables = JwtVariables;
 
@@ -21,6 +22,7 @@ app.use(
 app.use(logger());
 
 app.route("api/users",userRouter);
+app.route("api/fitness",fitnessRouter);
 
 export const getDB = (c: Context) => drizzle(c.env.DATABASE,{ schema });
 

@@ -50,28 +50,28 @@ interface Category {
 export const Home: React.FC = () => {
   const categories: Category[] = [
     {
-      to: "/fitness/:id",
+      to: "/fitness",
       title: "Fitness",
       description: "Track your fitness objectives and monitor your progress effectively.",
       icon: Dumbbell,
       gradient: "bg-gradient-to-br from-green-400 to-emerald-600",
     },
     {
-      to: "/club/:id",
+      to: "/club",
       title: "Club",
       description: "Seamlessly join and manage your club activities.",
       icon: Users,
       gradient: "bg-gradient-to-br from-blue-400 to-indigo-600",
     },
     {
-      to: "/personal/:id",
+      to: "/personal",
       title: "Personal",
       description: "Efficiently organize your personal tasks and activities.",
       icon: ListTodo,
       gradient: "bg-gradient-to-br from-orange-400 to-red-600",
     },
     {
-      to: "/college/:id",
+      to: "/college",
       title: "College",
       description: "Manage your college-related activities with efficiency.",
       icon: GraduationCap,
